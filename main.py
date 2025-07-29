@@ -1,22 +1,121 @@
 import streamlit as st
+import os
+import sys
+
+# Multiple OpenCV import strategies
+cv2 = None
+opencv_error = None
+
+# Strategy 1: Try opencv-python-headless
 try:
     import cv2
-    # Debug: Check OpenCV version and build info
-    st.sidebar.write(f"OpenCV version: {cv2.__version__}")
-except ImportError as e:
-    st.error(f"OpenCV import failed: {e}")
-    st.error("Please ensure opencv-python-headless is properly installed.")
-    # Additional debugging information
-    import sys
-    st.write(f"Python version: {sys.version}")
-    st.write("Please try the following solutions:")
-    st.write("1. Redeploy your app on Streamlit Cloud")
-    st.write("2. Use the alternative requirements.txt file")
-    st.write("3. Contact support if the issue persists")
-    st.stop()
+    st.sidebar.success(f"✅ OpenCV loaded successfully (version: {cv2.__version__})")
+except ImportError as e1:
+    opencv_error = str(e1)
+    
+    # Strategy 2: Try installing/importing opencv-contrib-python-headless
+    try:
+        import subprocess
+        st.warning("Attempting to install opencv-contrib-python-headless...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "opencv-contrib-python-headless>=4.9.0.80"])
+        import cv2
+        st.sidebar.success(f"✅ OpenCV contrib loaded successfully (version: {cv2.__version__})")
+    except Exception as e2:
+        
+        # Strategy 3: Try regular opencv-python
+        try:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "opencv-python>=4.9.0.80"])
+            import cv2
+            st.sidebar.success(f"✅ OpenCV regular loaded successfully (version: {cv2.__version__})")
+        except Exception as e3:
+            
+            # Final fallback: Show comprehensive error information
+            st.error("🚨 OpenCV Installation Failed")
+            st.error(f"**Primary Error:** {opencv_error}")
+            
+            # Platform-specific solutions
+            if sys.platform.startswith('linux'):
+                st.error("""
+                **Linux System Solutions:**
+                
+                1. **Install system dependencies:**
+                ```bash
+                sudo apt-get update
+                sudo apt-get install -y libgl1-mesa-glx libglib2.0-0 libsm6 libxext6 libxrender-dev libgomp1
+                ```
+                
+                2. **For Streamlit Cloud, create packages.txt file with:**
+                ```
+                libgl1-mesa-glx
+                libglib2.0-0
+                ```
+                
+                3. **Try alternative requirements.txt:**
+                - Use requirements-alternative.txt
+                - Or manually install: `pip install opencv-contrib-python-headless`
+                """)
+            
+            elif sys.platform == 'darwin':  # macOS
+                st.error("""
+                **macOS Solutions:**
+                
+                1. **Install via Homebrew:**
+                ```bash
+                brew install opencv
+                ```
+                
+                2. **Use conda instead of pip:**
+                ```bash
+                conda install opencv
+                ```
+                """)
+            
+            elif sys.platform.startswith('win'):  # Windows
+                st.error("""
+                **Windows Solutions:**
+                
+                1. **Reinstall with specific version:**
+                ```cmd
+                pip uninstall opencv-python opencv-python-headless
+                pip install opencv-python-headless==4.9.0.80
+                ```
+                
+                2. **Install Visual C++ Redistributable:**
+                - Download from Microsoft official site
+                """)
+            
+            # Generic solutions
+            st.error("""
+            **General Solutions:**
+            
+            1. **Virtual Environment Reset:**
+            ```bash
+            pip uninstall opencv-python opencv-python-headless opencv-contrib-python opencv-contrib-python-headless
+            pip install opencv-python-headless>=4.9.0.80
+            ```
+            
+            2. **Use alternative requirements file:**
+            ```bash
+            pip install -r requirements-alternative.txt
+            ```
+            
+            3. **For Streamlit Cloud:**
+            - Redeploy your app
+            - Create a packages.txt file with system dependencies
+            - Use the alternative requirements.txt
+            """)
+            
+            st.write(f"**System Info:**")
+            st.write(f"- Platform: {sys.platform}")
+            st.write(f"- Python: {sys.version}")
+            st.write(f"- Architecture: {os.uname() if hasattr(os, 'uname') else 'Windows'}")
+            
+            st.stop()
+
 except Exception as e:
-    st.error(f"Unexpected error importing OpenCV: {e}")
-    st.error("This might be a system-level issue with OpenCV.")
+    st.error(f"🚨 Unexpected error importing OpenCV: {e}")
+    st.error("This might be a system-level compatibility issue.")
+    st.info("Try using the alternative requirements.txt file or contact support.")
     st.stop()
 import numpy as np
 from PIL import Image
