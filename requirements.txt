@@ -1,0 +1,12 @@
+# Core dependencies for PlateSight
+streamlit>=1.28.0
+ultralytics>=8.0.0
+opencv-python>=4.5.0
+Pillow>=8.3.0
+torch>=1.9.0
+torchvision>=0.10.0
+numpy>=1.21.0
+
+# Optional: For Roboflow integration (can be skipped if not using Roboflow models)
+inference-sdk
+inference

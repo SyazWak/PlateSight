@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyTorch
+*.pth
+*.pt
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Model weights - exclude large files that exceed GitHub limits
+weights_RF_DETR.pt
+# Uncomment below to exclude all weight files
+# weights_*.pt
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+logs/
+
+# Data (uncomment if you want to ignore dataset)
+# *.jpg
+# *.jpeg
+# *.png
+# *.mp4
+# *.avi
