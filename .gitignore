@@ -22,10 +22,6 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# PyTorch
-*.pth
-*.pt
-
 # Virtual Environment
 venv/
 env/
