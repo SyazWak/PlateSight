@@ -1,5 +1,23 @@
 import streamlit as st
-import cv2
+try:
+    import cv2
+    # Debug: Check OpenCV version and build info
+    st.sidebar.write(f"OpenCV version: {cv2.__version__}")
+except ImportError as e:
+    st.error(f"OpenCV import failed: {e}")
+    st.error("Please ensure opencv-python-headless is properly installed.")
+    # Additional debugging information
+    import sys
+    st.write(f"Python version: {sys.version}")
+    st.write("Please try the following solutions:")
+    st.write("1. Redeploy your app on Streamlit Cloud")
+    st.write("2. Use the alternative requirements.txt file")
+    st.write("3. Contact support if the issue persists")
+    st.stop()
+except Exception as e:
+    st.error(f"Unexpected error importing OpenCV: {e}")
+    st.error("This might be a system-level issue with OpenCV.")
+    st.stop()
 import numpy as np
 from PIL import Image
 from ultralytics import YOLO

@@ -1,8 +1,9 @@
 # Core dependencies for PlateSight
 streamlit>=1.28.0
 ultralytics>=8.0.0
-opencv-python-headless>=4.5.0
+opencv-python-headless==4.8.1.78
 Pillow>=8.3.0
 torch>=1.9.0
 torchvision>=0.10.0
-numpy>=1.21.0
+numpy>=1.21.0,<2.0.0
+protobuf<=3.20.3
