@@ -2,6 +2,8 @@
 
 An intelligent web application that leverages computer vision and deep learning to automatically identify Malaysian cuisine. Built with modern web technologies for scalable deployment and cross-platform accessibility.
 
+> 🎬 **[Watch Demo Video](./docs/Demo_Malaysian_Food_Detection.mov)** - See PlateSight identifying Malaysian dishes in real-time!
+
 ## 🎯 Overview
 
 PlateSight is a production-ready food recognition system that accurately identifies 17 traditional Malaysian dishes using state-of-the-art YOLO (You Only Look Once) object detection models. The application provides real-time analysis through an intuitive web interface.
@@ -12,6 +14,14 @@ PlateSight is a production-ready food recognition system that accurately identif
 - Responsive web interface built with Streamlit
 - Multiple pre-trained models for optimal performance
 - Scalable architecture suitable for production deployment
+
+## 🎬 Demo Video
+
+See PlateSight in action! Watch our comprehensive demo showcasing the food recognition system detecting various Malaysian dishes:
+
+**[📽️ View Demo Video](./docs/Demo_Malaysian_Food_Detection.mov)**
+
+*Note: Click the link above to download and view the demonstration video showing real-time Malaysian food detection capabilities.*
 
 ## 🛠️ Technology Stack
 
